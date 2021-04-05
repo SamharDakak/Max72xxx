@@ -1060,7 +1060,7 @@ const char Alphabet[96][8] PROGMEM={
 };
 
 
-
+/*hji i ma suamhar*/ 
 // Message to be displayed, stored in flash
 const char message[] PROGMEM = " hi Gruppe 6 " ;
 
