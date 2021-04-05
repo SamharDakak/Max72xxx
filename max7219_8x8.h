@@ -1100,3 +1100,4 @@ int minuten_erzeuger (int V ,int min );
 int sekunden_erzeuger( int sec  );
 int  stunden_erzeuger(int sec  , int min, int stu  );
 void Max (int stu );
+//test
