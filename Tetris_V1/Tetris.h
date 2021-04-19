@@ -19,14 +19,16 @@
 #include <avr/pgmspace.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <util/atomic.h>
+#include <avr/interrupt.h>
 #define maxInUse 2 
 #define SLAVE_SELECT    PORTB &= ~(1 << PB2)
 #define SLAVE_DESELECT  PORTB |= (1 << PB2)
+volatile unsigned long timer1_millis;
 
+void init_millis(unsigned long F_CPU);
 
-
-
-
+unsigned long millis();
 
 void initSPI(void);
 
