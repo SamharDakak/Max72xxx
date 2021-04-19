@@ -6,8 +6,8 @@
  */ 
 
 
-#ifndef Tetris
-#define Tetris
+#ifndef Tetris.h
+#define Tetris.h
 
 #ifndef F_CPU                   // optional definieren
 #define F_CPU 12288000UL        // ATmega 328 mit 12,288 MHz Quarz
@@ -84,4 +84,4 @@ void initMatrix(void);
 
 void clearMatrix(void);
 
-#endif /* INCFILE1_H_ */
+#endif Tetris.h
