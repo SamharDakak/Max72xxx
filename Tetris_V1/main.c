@@ -8,6 +8,11 @@
 
 #include "Tetris.h"
 
+// Festlegung der Quarzfrequenz
+#ifndef F_CPU                   // optional definieren
+#define F_CPU 12288000UL        // ATmega 328 mit 12,288 MHz Quarz
+#endif
+
 #define NUM_DEVICES    2	 // Number of cascaded max7219's, or just 1
 void initSPI(void)
 {

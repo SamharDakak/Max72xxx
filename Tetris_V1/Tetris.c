@@ -143,7 +143,7 @@ int readBut()
 		
 	}
 //***********************************************************
-void init_millis(unsigned long F_CPU)
+void init_millis()
 {
 	unsigned long ctc_match_overflow;
 	

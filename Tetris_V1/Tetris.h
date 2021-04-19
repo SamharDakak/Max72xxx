@@ -8,10 +8,11 @@
 
 #ifndef Tetris.h
 #define Tetris.h
-
+// Festlegung der Quarzfrequenz
 #ifndef F_CPU                   // optional definieren
 #define F_CPU 12288000UL        // ATmega 328 mit 12,288 MHz Quarz
 #endif
+
 
 #include <avr/io.h>
 
@@ -26,7 +27,7 @@
 #define SLAVE_DESELECT  PORTB |= (1 << PB2)
 volatile unsigned long timer1_millis;
 
-void init_millis(unsigned long F_CPU);
+void init_millis();
 
 unsigned long millis();
 

@@ -3,29 +3,31 @@ Tetris_V1.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  00000200  2**0
+  0 .data         00000000  00800100  00800100  0000026a  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000001ac  00000000  00000000  00000054  2**1
+  1 .text         000001f6  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  00000200  2**0
+  2 .bss          0000019e  00800100  00800100  0000026a  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  0000026a  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000230  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000029c  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 000000f8  00000000  00000000  0000026c  2**0
+  5 .debug_aranges 00000138  00000000  00000000  000002d8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00001636  00000000  00000000  00000364  2**0
+  6 .debug_info   000019a4  00000000  00000000  00000410  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000008f8  00000000  00000000  0000199a  2**0
+  7 .debug_abbrev 00000a54  00000000  00000000  00001db4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00001053  00000000  00000000  00002292  2**0
+  8 .debug_line   0000179d  00000000  00000000  00002808  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000284  00000000  00000000  000032e8  2**2
+  9 .debug_frame  0000034c  00000000  00000000  00003fa8  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000669  00000000  00000000  0000356c  2**0
+ 10 .debug_str    000006c3  00000000  00000000  000042f4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000d96  00000000  00000000  00003bd5  2**0
+ 11 .debug_loc    00001256  00000000  00000000  000049b7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000160  00000000  00000000  0000496b  2**0
+ 12 .debug_ranges 000001c0  00000000  00000000  00005c0d  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -42,7 +44,7 @@ Disassembly of section .text:
   20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__vector_11>
   30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
@@ -70,7 +72,7 @@ Disassembly of section .text:
   74:	11 e0       	ldi	r17, 0x01	; 1
   76:	a0 e0       	ldi	r26, 0x00	; 0
   78:	b1 e0       	ldi	r27, 0x01	; 1
-  7a:	ec ea       	ldi	r30, 0xAC	; 172
+  7a:	e6 ef       	ldi	r30, 0xF6	; 246
   7c:	f1 e0       	ldi	r31, 0x01	; 1
   7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
   80:	05 90       	lpm	r0, Z+
@@ -80,7 +82,7 @@ Disassembly of section .text:
   88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
 
 0000008a <__do_clear_bss>:
-  8a:	21 e0       	ldi	r18, 0x01	; 1
+  8a:	22 e0       	ldi	r18, 0x02	; 2
   8c:	a0 e0       	ldi	r26, 0x00	; 0
   8e:	b1 e0       	ldi	r27, 0x01	; 1
   90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
@@ -89,157 +91,312 @@ Disassembly of section .text:
   92:	1d 92       	st	X+, r1
 
 00000094 <.do_clear_bss_start>:
-  94:	a0 30       	cpi	r26, 0x00	; 0
+  94:	ae 39       	cpi	r26, 0x9E	; 158
   96:	b2 07       	cpc	r27, r18
   98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
-  9a:	0e 94 cd 00 	call	0x19a	; 0x19a <main>
-  9e:	0c 94 d4 00 	jmp	0x1a8	; 0x1a8 <_exit>
+  9a:	0e 94 f2 00 	call	0x1e4	; 0x1e4 <main>
+  9e:	0c 94 f9 00 	jmp	0x1f2	; 0x1f2 <_exit>
 
 000000a2 <__bad_interrupt>:
   a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
-000000a6 <initSPI>:
-   writeByte(0x00);      // Send the value
-  }
-
- SLAVE_DESELECT;
- /* startISR();*/
+000000a6 <__vector_11>:
+	}
+	return millis_return;
 }
-  a6:	84 b1       	in	r24, 0x04	; 4
-  a8:	84 60       	ori	r24, 0x04	; 4
-  aa:	84 b9       	out	0x04, r24	; 4
-  ac:	85 b1       	in	r24, 0x05	; 5
-  ae:	84 60       	ori	r24, 0x04	; 4
-  b0:	85 b9       	out	0x05, r24	; 5
-  b2:	84 b1       	in	r24, 0x04	; 4
-  b4:	88 60       	ori	r24, 0x08	; 8
-  b6:	84 b9       	out	0x04, r24	; 4
-  b8:	84 b1       	in	r24, 0x04	; 4
-  ba:	80 62       	ori	r24, 0x20	; 32
-  bc:	84 b9       	out	0x04, r24	; 4
-  be:	8c b5       	in	r24, 0x2c	; 44
-  c0:	80 61       	ori	r24, 0x10	; 16
-  c2:	8c bd       	out	0x2c, r24	; 44
-  c4:	8c b5       	in	r24, 0x2c	; 44
-  c6:	80 64       	ori	r24, 0x40	; 64
-  c8:	8c bd       	out	0x2c, r24	; 44
-  ca:	08 95       	ret
+//***********************************************************
+ ISR(TIMER1_COMPA_vect)
+ {
+  a6:	1f 92       	push	r1
+  a8:	0f 92       	push	r0
+  aa:	0f b6       	in	r0, 0x3f	; 63
+  ac:	0f 92       	push	r0
+  ae:	11 24       	eor	r1, r1
+  b0:	8f 93       	push	r24
+  b2:	9f 93       	push	r25
+  b4:	af 93       	push	r26
+  b6:	bf 93       	push	r27
+	 timer1_millis++;
+  b8:	80 91 16 02 	lds	r24, 0x0216	; 0x800216 <timer1_millis>
+  bc:	90 91 17 02 	lds	r25, 0x0217	; 0x800217 <timer1_millis+0x1>
+  c0:	a0 91 18 02 	lds	r26, 0x0218	; 0x800218 <timer1_millis+0x2>
+  c4:	b0 91 19 02 	lds	r27, 0x0219	; 0x800219 <timer1_millis+0x3>
+  c8:	01 96       	adiw	r24, 0x01	; 1
+  ca:	a1 1d       	adc	r26, r1
+  cc:	b1 1d       	adc	r27, r1
+  ce:	80 93 16 02 	sts	0x0216, r24	; 0x800216 <timer1_millis>
+  d2:	90 93 17 02 	sts	0x0217, r25	; 0x800217 <timer1_millis+0x1>
+  d6:	a0 93 18 02 	sts	0x0218, r26	; 0x800218 <timer1_millis+0x2>
+  da:	b0 93 19 02 	sts	0x0219, r27	; 0x800219 <timer1_millis+0x3>
+ }
+  de:	bf 91       	pop	r27
+  e0:	af 91       	pop	r26
+  e2:	9f 91       	pop	r25
+  e4:	8f 91       	pop	r24
+  e6:	0f 90       	pop	r0
+  e8:	0f be       	out	0x3f, r0	; 63
+  ea:	0f 90       	pop	r0
+  ec:	1f 90       	pop	r1
+  ee:	18 95       	reti
 
-000000cc <writeByte>:
-  cc:	8e bd       	out	0x2e, r24	; 46
-  ce:	0d b4       	in	r0, 0x2d	; 45
-  d0:	07 fe       	sbrs	r0, 7
-  d2:	fd cf       	rjmp	.-6      	; 0xce <writeByte+0x2>
-  d4:	08 95       	ret
+000000f0 <initSPI>:
+// Sends word through SPI
+void writeWord(uint8_t address, uint8_t data)
+{
+	writeByte(address);	// Write first byte
+	writeByte(data);      // Write Second byte
+}
+  f0:	84 b1       	in	r24, 0x04	; 4
+  f2:	84 60       	ori	r24, 0x04	; 4
+  f4:	84 b9       	out	0x04, r24	; 4
+  f6:	85 b1       	in	r24, 0x05	; 5
+  f8:	84 60       	ori	r24, 0x04	; 4
+  fa:	85 b9       	out	0x05, r24	; 5
+  fc:	84 b1       	in	r24, 0x04	; 4
+  fe:	88 60       	ori	r24, 0x08	; 8
+ 100:	84 b9       	out	0x04, r24	; 4
+ 102:	84 b1       	in	r24, 0x04	; 4
+ 104:	80 62       	ori	r24, 0x20	; 32
+ 106:	84 b9       	out	0x04, r24	; 4
+ 108:	8c b5       	in	r24, 0x2c	; 44
+ 10a:	80 61       	ori	r24, 0x10	; 16
+ 10c:	8c bd       	out	0x2c, r24	; 44
+ 10e:	8c b5       	in	r24, 0x2c	; 44
+ 110:	80 64       	ori	r24, 0x40	; 64
+ 112:	8c bd       	out	0x2c, r24	; 44
+ 114:	08 95       	ret
 
-000000d6 <initMatrix>:
-  d6:	cf 93       	push	r28
-  d8:	85 b1       	in	r24, 0x05	; 5
-  da:	8b 7f       	andi	r24, 0xFB	; 251
-  dc:	85 b9       	out	0x05, r24	; 5
-  de:	c0 e0       	ldi	r28, 0x00	; 0
-  e0:	07 c0       	rjmp	.+14     	; 0xf0 <initMatrix+0x1a>
-  e2:	8e e0       	ldi	r24, 0x0E	; 14
-  e4:	0e 94 66 00 	call	0xcc	; 0xcc <writeByte>
-  e8:	87 e0       	ldi	r24, 0x07	; 7
-  ea:	0e 94 66 00 	call	0xcc	; 0xcc <writeByte>
-  ee:	cf 5f       	subi	r28, 0xFF	; 255
-  f0:	c2 30       	cpi	r28, 0x02	; 2
-  f2:	b8 f3       	brcs	.-18     	; 0xe2 <initMatrix+0xc>
-  f4:	85 b1       	in	r24, 0x05	; 5
-  f6:	84 60       	ori	r24, 0x04	; 4
-  f8:	85 b9       	out	0x05, r24	; 5
-  fa:	85 b1       	in	r24, 0x05	; 5
-  fc:	8b 7f       	andi	r24, 0xFB	; 251
-  fe:	85 b9       	out	0x05, r24	; 5
- 100:	c0 e0       	ldi	r28, 0x00	; 0
- 102:	07 c0       	rjmp	.+14     	; 0x112 <initMatrix+0x3c>
- 104:	8b e0       	ldi	r24, 0x0B	; 11
- 106:	0e 94 66 00 	call	0xcc	; 0xcc <writeByte>
- 10a:	87 e0       	ldi	r24, 0x07	; 7
- 10c:	0e 94 66 00 	call	0xcc	; 0xcc <writeByte>
- 110:	cf 5f       	subi	r28, 0xFF	; 255
- 112:	c2 30       	cpi	r28, 0x02	; 2
- 114:	b8 f3       	brcs	.-18     	; 0x104 <initMatrix+0x2e>
- 116:	85 b1       	in	r24, 0x05	; 5
- 118:	84 60       	ori	r24, 0x04	; 4
- 11a:	85 b9       	out	0x05, r24	; 5
- 11c:	85 b1       	in	r24, 0x05	; 5
- 11e:	8b 7f       	andi	r24, 0xFB	; 251
- 120:	85 b9       	out	0x05, r24	; 5
- 122:	c0 e0       	ldi	r28, 0x00	; 0
- 124:	07 c0       	rjmp	.+14     	; 0x134 <initMatrix+0x5e>
- 126:	8c e0       	ldi	r24, 0x0C	; 12
- 128:	0e 94 66 00 	call	0xcc	; 0xcc <writeByte>
- 12c:	81 e0       	ldi	r24, 0x01	; 1
- 12e:	0e 94 66 00 	call	0xcc	; 0xcc <writeByte>
- 132:	cf 5f       	subi	r28, 0xFF	; 255
- 134:	c2 30       	cpi	r28, 0x02	; 2
- 136:	b8 f3       	brcs	.-18     	; 0x126 <initMatrix+0x50>
- 138:	85 b1       	in	r24, 0x05	; 5
- 13a:	84 60       	ori	r24, 0x04	; 4
- 13c:	85 b9       	out	0x05, r24	; 5
+00000116 <writeByte>:
+ 116:	8e bd       	out	0x2e, r24	; 46
+ 118:	0d b4       	in	r0, 0x2d	; 45
+ 11a:	07 fe       	sbrs	r0, 7
+ 11c:	fd cf       	rjmp	.-6      	; 0x118 <writeByte+0x2>
+ 11e:	08 95       	ret
+
+00000120 <initMatrix>:
+
+//**********************************************************************************************************************************************************
+// Initializes all cascaded devices
+
+void initMatrix()
+{
+ 120:	cf 93       	push	r28
+	uint8_t i;	// Var used in for loops
+
+	// Set display brighness
+	SLAVE_SELECT;
+ 122:	85 b1       	in	r24, 0x05	; 5
+ 124:	8b 7f       	andi	r24, 0xFB	; 251
+ 126:	85 b9       	out	0x05, r24	; 5
+	for(i = 0; i < NUM_DEVICES; i++)	// Loop through number of cascaded devices
+ 128:	c0 e0       	ldi	r28, 0x00	; 0
+ 12a:	07 c0       	rjmp	.+14     	; 0x13a <initMatrix+0x1a>
+	{
+		writeByte(0x0E); // Select Intensity register
+ 12c:	8e e0       	ldi	r24, 0x0E	; 14
+ 12e:	0e 94 8b 00 	call	0x116	; 0x116 <writeByte>
+		writeByte(0x07); // Set brightness
+ 132:	87 e0       	ldi	r24, 0x07	; 7
+ 134:	0e 94 8b 00 	call	0x116	; 0x116 <writeByte>
+{
+	uint8_t i;	// Var used in for loops
+
+	// Set display brighness
+	SLAVE_SELECT;
+	for(i = 0; i < NUM_DEVICES; i++)	// Loop through number of cascaded devices
+ 138:	cf 5f       	subi	r28, 0xFF	; 255
+ 13a:	c2 30       	cpi	r28, 0x02	; 2
+ 13c:	b8 f3       	brcs	.-18     	; 0x12c <initMatrix+0xc>
+	{
+		writeByte(0x0E); // Select Intensity register
+		writeByte(0x07); // Set brightness
+	}
+	SLAVE_DESELECT;
  13e:	85 b1       	in	r24, 0x05	; 5
- 140:	8b 7f       	andi	r24, 0xFB	; 251
+ 140:	84 60       	ori	r24, 0x04	; 4
  142:	85 b9       	out	0x05, r24	; 5
- 144:	c0 e0       	ldi	r28, 0x00	; 0
- 146:	07 c0       	rjmp	.+14     	; 0x156 <initMatrix+0x80>
- 148:	8f e0       	ldi	r24, 0x0F	; 15
- 14a:	0e 94 66 00 	call	0xcc	; 0xcc <writeByte>
- 14e:	80 e0       	ldi	r24, 0x00	; 0
- 150:	0e 94 66 00 	call	0xcc	; 0xcc <writeByte>
- 154:	cf 5f       	subi	r28, 0xFF	; 255
- 156:	c2 30       	cpi	r28, 0x02	; 2
- 158:	b8 f3       	brcs	.-18     	; 0x148 <initMatrix+0x72>
- 15a:	85 b1       	in	r24, 0x05	; 5
- 15c:	84 60       	ori	r24, 0x04	; 4
- 15e:	85 b9       	out	0x05, r24	; 5
- 160:	cf 91       	pop	r28
- 162:	08 95       	ret
 
-00000164 <clearMatrix>:
- 164:	cf 93       	push	r28
- 166:	df 93       	push	r29
- 168:	d1 e0       	ldi	r29, 0x01	; 1
- 16a:	12 c0       	rjmp	.+36     	; 0x190 <clearMatrix+0x2c>
- 16c:	85 b1       	in	r24, 0x05	; 5
- 16e:	8b 7f       	andi	r24, 0xFB	; 251
- 170:	85 b9       	out	0x05, r24	; 5
- 172:	c0 e0       	ldi	r28, 0x00	; 0
- 174:	07 c0       	rjmp	.+14     	; 0x184 <clearMatrix+0x20>
- 176:	8d 2f       	mov	r24, r29
- 178:	0e 94 66 00 	call	0xcc	; 0xcc <writeByte>
- 17c:	80 e0       	ldi	r24, 0x00	; 0
- 17e:	0e 94 66 00 	call	0xcc	; 0xcc <writeByte>
- 182:	cf 5f       	subi	r28, 0xFF	; 255
- 184:	c2 30       	cpi	r28, 0x02	; 2
- 186:	b8 f3       	brcs	.-18     	; 0x176 <clearMatrix+0x12>
+	
+	// Set display refresh
+	SLAVE_SELECT;
+ 144:	85 b1       	in	r24, 0x05	; 5
+ 146:	8b 7f       	andi	r24, 0xFB	; 251
+ 148:	85 b9       	out	0x05, r24	; 5
+	for(i = 0; i < NUM_DEVICES; i++)
+ 14a:	c0 e0       	ldi	r28, 0x00	; 0
+ 14c:	07 c0       	rjmp	.+14     	; 0x15c <initMatrix+0x3c>
+	{
+		writeByte(0x0B); // Select Scan-Limit register
+ 14e:	8b e0       	ldi	r24, 0x0B	; 11
+ 150:	0e 94 8b 00 	call	0x116	; 0x116 <writeByte>
+		writeByte(0x07); // Select columns 0-7
+ 154:	87 e0       	ldi	r24, 0x07	; 7
+ 156:	0e 94 8b 00 	call	0x116	; 0x116 <writeByte>
+	SLAVE_DESELECT;
+
+	
+	// Set display refresh
+	SLAVE_SELECT;
+	for(i = 0; i < NUM_DEVICES; i++)
+ 15a:	cf 5f       	subi	r28, 0xFF	; 255
+ 15c:	c2 30       	cpi	r28, 0x02	; 2
+ 15e:	b8 f3       	brcs	.-18     	; 0x14e <initMatrix+0x2e>
+	{
+		writeByte(0x0B); // Select Scan-Limit register
+		writeByte(0x07); // Select columns 0-7
+	}
+	SLAVE_DESELECT;
+ 160:	85 b1       	in	r24, 0x05	; 5
+ 162:	84 60       	ori	r24, 0x04	; 4
+ 164:	85 b9       	out	0x05, r24	; 5
+
+	
+	// Turn on the display
+	SLAVE_SELECT;
+ 166:	85 b1       	in	r24, 0x05	; 5
+ 168:	8b 7f       	andi	r24, 0xFB	; 251
+ 16a:	85 b9       	out	0x05, r24	; 5
+	for(i = 0; i < NUM_DEVICES; i++)
+ 16c:	c0 e0       	ldi	r28, 0x00	; 0
+ 16e:	07 c0       	rjmp	.+14     	; 0x17e <initMatrix+0x5e>
+	{
+		writeByte(0x0C); // Select Shutdown register
+ 170:	8c e0       	ldi	r24, 0x0C	; 12
+ 172:	0e 94 8b 00 	call	0x116	; 0x116 <writeByte>
+		writeByte(0x01); // Select Normal Operation mode
+ 176:	81 e0       	ldi	r24, 0x01	; 1
+ 178:	0e 94 8b 00 	call	0x116	; 0x116 <writeByte>
+	SLAVE_DESELECT;
+
+	
+	// Turn on the display
+	SLAVE_SELECT;
+	for(i = 0; i < NUM_DEVICES; i++)
+ 17c:	cf 5f       	subi	r28, 0xFF	; 255
+ 17e:	c2 30       	cpi	r28, 0x02	; 2
+ 180:	b8 f3       	brcs	.-18     	; 0x170 <initMatrix+0x50>
+	{
+		writeByte(0x0C); // Select Shutdown register
+		writeByte(0x01); // Select Normal Operation mode
+	}
+	SLAVE_DESELECT;
+ 182:	85 b1       	in	r24, 0x05	; 5
+ 184:	84 60       	ori	r24, 0x04	; 4
+ 186:	85 b9       	out	0x05, r24	; 5
+
+	
+	// Disable Display-Test
+	SLAVE_SELECT;
  188:	85 b1       	in	r24, 0x05	; 5
- 18a:	84 60       	ori	r24, 0x04	; 4
+ 18a:	8b 7f       	andi	r24, 0xFB	; 251
  18c:	85 b9       	out	0x05, r24	; 5
- 18e:	df 5f       	subi	r29, 0xFF	; 255
- 190:	d9 30       	cpi	r29, 0x09	; 9
- 192:	60 f3       	brcs	.-40     	; 0x16c <clearMatrix+0x8>
- 194:	df 91       	pop	r29
- 196:	cf 91       	pop	r28
- 198:	08 95       	ret
+	for(i = 0; i < NUM_DEVICES; i++)
+ 18e:	c0 e0       	ldi	r28, 0x00	; 0
+ 190:	07 c0       	rjmp	.+14     	; 0x1a0 <initMatrix+0x80>
+	{
+		writeByte(0x0F); // Select Display-Test register
+ 192:	8f e0       	ldi	r24, 0x0F	; 15
+ 194:	0e 94 8b 00 	call	0x116	; 0x116 <writeByte>
+		writeByte(0x00); // Disable Display-Test
+ 198:	80 e0       	ldi	r24, 0x00	; 0
+ 19a:	0e 94 8b 00 	call	0x116	; 0x116 <writeByte>
+	SLAVE_DESELECT;
 
-0000019a <main>:
+	
+	// Disable Display-Test
+	SLAVE_SELECT;
+	for(i = 0; i < NUM_DEVICES; i++)
+ 19e:	cf 5f       	subi	r28, 0xFF	; 255
+ 1a0:	c2 30       	cpi	r28, 0x02	; 2
+ 1a2:	b8 f3       	brcs	.-18     	; 0x192 <initMatrix+0x72>
+	{
+		writeByte(0x0F); // Select Display-Test register
+		writeByte(0x00); // Disable Display-Test
+	}
+	SLAVE_DESELECT;
+ 1a4:	85 b1       	in	r24, 0x05	; 5
+ 1a6:	84 60       	ori	r24, 0x04	; 4
+ 1a8:	85 b9       	out	0x05, r24	; 5
+}
+ 1aa:	cf 91       	pop	r28
+ 1ac:	08 95       	ret
+
+000001ae <clearMatrix>:
+//**********************************************************************************************************************************************************
+void clearMatrix(void)
+{
+ 1ae:	cf 93       	push	r28
+ 1b0:	df 93       	push	r29
+	for(uint8_t x = 1; x < 9; x++) // for all columns
+ 1b2:	d1 e0       	ldi	r29, 0x01	; 1
+ 1b4:	12 c0       	rjmp	.+36     	; 0x1da <clearMatrix+0x2c>
+	{
+		SLAVE_SELECT;
+ 1b6:	85 b1       	in	r24, 0x05	; 5
+ 1b8:	8b 7f       	andi	r24, 0xFB	; 251
+ 1ba:	85 b9       	out	0x05, r24	; 5
+		for(uint8_t i = 0; i < NUM_DEVICES; i++)
+ 1bc:	c0 e0       	ldi	r28, 0x00	; 0
+ 1be:	07 c0       	rjmp	.+14     	; 0x1ce <clearMatrix+0x20>
+		{
+			writeByte(x);    // Select column x
+ 1c0:	8d 2f       	mov	r24, r29
+ 1c2:	0e 94 8b 00 	call	0x116	; 0x116 <writeByte>
+			writeByte(0x00); // Set column to 0
+ 1c6:	80 e0       	ldi	r24, 0x00	; 0
+ 1c8:	0e 94 8b 00 	call	0x116	; 0x116 <writeByte>
+void clearMatrix(void)
+{
+	for(uint8_t x = 1; x < 9; x++) // for all columns
+	{
+		SLAVE_SELECT;
+		for(uint8_t i = 0; i < NUM_DEVICES; i++)
+ 1cc:	cf 5f       	subi	r28, 0xFF	; 255
+ 1ce:	c2 30       	cpi	r28, 0x02	; 2
+ 1d0:	b8 f3       	brcs	.-18     	; 0x1c0 <clearMatrix+0x12>
+		{
+			writeByte(x);    // Select column x
+			writeByte(0x00); // Set column to 0
+		}
+		SLAVE_DESELECT;
+ 1d2:	85 b1       	in	r24, 0x05	; 5
+ 1d4:	84 60       	ori	r24, 0x04	; 4
+ 1d6:	85 b9       	out	0x05, r24	; 5
+	SLAVE_DESELECT;
+}
+//**********************************************************************************************************************************************************
+void clearMatrix(void)
+{
+	for(uint8_t x = 1; x < 9; x++) // for all columns
+ 1d8:	df 5f       	subi	r29, 0xFF	; 255
+ 1da:	d9 30       	cpi	r29, 0x09	; 9
+ 1dc:	60 f3       	brcs	.-40     	; 0x1b6 <clearMatrix+0x8>
+			writeByte(x);    // Select column x
+			writeByte(0x00); // Set column to 0
+		}
+		SLAVE_DESELECT;
+	}
+}
+ 1de:	df 91       	pop	r29
+ 1e0:	cf 91       	pop	r28
+ 1e2:	08 95       	ret
+
+000001e4 <main>:
 
 
 
 int main(void)
 {
 	initSPI();
- 19a:	0e 94 53 00 	call	0xa6	; 0xa6 <initSPI>
+ 1e4:	0e 94 78 00 	call	0xf0	; 0xf0 <initSPI>
 	initMatrix();
- 19e:	0e 94 6b 00 	call	0xd6	; 0xd6 <initMatrix>
+ 1e8:	0e 94 90 00 	call	0x120	; 0x120 <initMatrix>
 	clearMatrix();
- 1a2:	0e 94 b2 00 	call	0x164	; 0x164 <clearMatrix>
- 1a6:	ff cf       	rjmp	.-2      	; 0x1a6 <main+0xc>
+ 1ec:	0e 94 d7 00 	call	0x1ae	; 0x1ae <clearMatrix>
+ 1f0:	ff cf       	rjmp	.-2      	; 0x1f0 <main+0xc>
 
-000001a8 <_exit>:
- 1a8:	f8 94       	cli
+000001f2 <_exit>:
+ 1f2:	f8 94       	cli
 
-000001aa <__stop_program>:
- 1aa:	ff cf       	rjmp	.-2      	; 0x1aa <__stop_program>
+000001f4 <__stop_program>:
+ 1f4:	ff cf       	rjmp	.-2      	; 0x1f4 <__stop_program>
