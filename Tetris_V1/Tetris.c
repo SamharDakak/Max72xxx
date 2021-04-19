@@ -144,8 +144,36 @@ int readBut()
 		
 	}
 //***********************************************************
+void init_millis(unsigned long F_CPU)
+{
+	unsigned long ctc_match_overflow;
+	
+	ctc_match_overflow = ((F_CPU / 1000) / 8); //when timer1 is this value, 1ms has passed
+	
+	// (Set timer to clear when matching ctc_match_overflow) | (Set clock divisor to 8)
+	TCCR1B |= (1 << WGM12) | (1 << CS11);
+	
+	// high byte first, then low byte
+	OCR1AH = (ctc_match_overflow >> 8);
+	OCR1AL = ctc_match_overflow;
+	
+	// Enable the compare match interrupt
+	TIMSK1 |= (1 << OCIE1A);
+	
+	//REMEMBER TO ENABLE GLOBAL INTERRUPTS AFTER THIS WITH sei(); !!!
+}
 
-void millis(){}
+unsigned long millis ()
+{
+	unsigned long millis_return;
+	
+	// Ensure this cannot be disrupted
+	ATOMIC_BLOCK(ATOMIC_FORCEON) {
+		millis_return = timer1_millis;
+	}
+	return millis_return;
+}
+
 //***********************************************************
 void updateLED()
 {
