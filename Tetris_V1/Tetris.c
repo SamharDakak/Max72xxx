@@ -162,7 +162,7 @@ void init_millis(unsigned long F_CPU)
 	
 	//REMEMBER TO ENABLE GLOBAL INTERRUPTS AFTER THIS WITH sei(); !!!
 }
-
+//***********************************************************
 unsigned long millis ()
 {
 	unsigned long millis_return;
@@ -173,6 +173,11 @@ unsigned long millis ()
 	}
 	return millis_return;
 }
+//***********************************************************
+ ISR(TIMER1_COMPA_vect)
+ {
+	 timer1_millis++;
+ }
 
 //***********************************************************
 void updateLED()
