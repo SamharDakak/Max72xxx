@@ -18,10 +18,6 @@ bool sw2_alt = 1;               // alter Wert von Taste 2
 bool sw3_alt = 1;               // alter Wert von Taste 3
 bool sw4_alt = 1;               // alter Wert von Taste 4
 
-bool sw1_slope = 0;             // Flankenspeicher fuer Taste 1
-bool sw2_slope = 0;             // Flankenspeicher fuer Taste 2
-bool sw3_slope = 0;             // Flankenspeicher fuer Taste 3
-bool sw4_slope = 0;             // Flankenspeicher fuer Taste 4
 
 long delays = 0;
 short delay_ = 500;
@@ -113,10 +109,10 @@ int readBut()
 		return 0;
 	}
 		// Einlesen der 4 Tastensignale
-		sw1_neu = (PIND & (1 << PD0));
-		sw2_neu = (PIND & (1 << PD1));
-		sw3_neu = (PIND & (1 << PD2));
-		sw4_neu = (PIND & (1 << PD3));
+		sw1_neu = (PIND & (1 << DDD0));
+		sw2_neu = (PIND & (1 << DDD1));
+		sw3_neu = (PIND & (1 << DDD2));
+		sw4_neu = (PIND & (1 << DDD3));
 		
 		// Auswerten der Flanken beim Druecken
 		
