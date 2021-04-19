@@ -7,6 +7,9 @@
 
 #include "Tetris.h"
 
+
+
+
 int SetbrightnessValue = 15;
 bool sw1_neu = 1;               // Bitspeicher fuer Taste 1
 bool sw2_neu = 1;               // Bitspeicher fuer Taste 2
@@ -99,7 +102,7 @@ void initTaster(void)
 {
 	DDRD = DDRD & 0xF0;             // Port B auf Eingabe schalten
 	PORTD |= 0x0F;                  // Pullup-Rs eingeschaltet
-	_delay_us(10);                  // Wartezeit Umstellung Hardware-Signal
+	_delay_ms(10);                  // Wartezeit Umstellung Hardware-Signal
 }
 
 int readBut()
@@ -676,7 +679,7 @@ void check_gameover()
 				pile[j][i]=0;
 			}
 			updateLED();
-			_delay_us(50);
+			_delay_ms(50);
 			
 			int k;
 			for(k=i;k>0;k--)
@@ -691,7 +694,7 @@ void check_gameover()
 				pile[j][0] = 0;
 			}
 			updateLED();
-			_delay_us(50);
+			_delay_ms(50);
 			i++;
 			
 			
@@ -720,7 +723,7 @@ void gameover()
   gameoverFlag = true;
   startTime = millis();       
        
-  _delay_us(300);       
+  _delay_ms(300);       
             
   while(true)      //To re-play if any buttons depressed again
   {      
